@@ -1,6 +1,6 @@
 -- inicializar.sql
 CREATE TABLE User (
-    id UUID PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     name VARCHAR(100),
     username VARCHAR(30),
     email VARCHAR(255),
@@ -8,75 +8,76 @@ CREATE TABLE User (
 );
 
 CREATE TABLE Client (
-    id UUID PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     FOREIGN KEY (id) REFERENCES User(id)
 );
 
 CREATE TABLE Freelancer (
-    id UUID PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     FOREIGN KEY (id) REFERENCES User(id)
 );
 
 CREATE TABLE Admin (
-    id UUID PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     FOREIGN KEY (id) REFERENCES User(id)
 );
 
-----------------------------------------------
 
 CREATE TABLE Service (
-    service_id UUID PRIMARY KEY,
-    freelancer_id UUID,
-    FOREIGN KEY (freelancer_id) REFERENCES Freelancer(id),
-    title VARCHAR(200),
+    service_id TEXT PRIMARY KEY,
+    freelancer_id TEXT,
+    title TEXT,
     description TEXT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    base_price NUMERIC(6,2)
+    base_price NUMERIC(6,2),
+    FOREIGN KEY (freelancer_id) REFERENCES Freelancer(id)
 );
 
+
 CREATE TABLE Conversation (
-    conversation_id UUID PRIMARY KEY,
-    service_id UUID,
-    client_id UUID,
-    freelancer_id UUID,
+    conversation_id TEXT PRIMARY KEY,
+    service_id TEXT,
+    client_id TEXT,
+    freelancer_id TEXT,
     FOREIGN KEY (service_id) REFERENCES Service(service_id),
     FOREIGN KEY (client_id) REFERENCES Client(id),
     FOREIGN KEY (freelancer_id) REFERENCES Freelancer(id)
 );
 
 CREATE TABLE Message (
-    message_id UUID PRIMARY KEY,
-    conversation_id UUID,
-    FOREIGN KEY (conversation_id) REFERENCES Conversation(conversation_id),
-    sender UUID,
-    FOREIGN KEY (sender) REFERENCES User(id),
+    message_id TEXT PRIMARY KEY,
+    conversation_id TEXT,
+    send_id TEXT,
     text TEXT,
-    sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (send_id) REFERENCES User(id),
+    FOREIGN KEY (conversation_id) REFERENCES Conversation(conversation_id)
 );
 
 CREATE TABLE Demand (
-    order_id UUID PRIMARY KEY,
-    service_id UUID,
-    client_id UUID,
+    order_id TEXT PRIMARY KEY,
+    service_id TEXT,
+    client_id TEXT,
+    completed INTEGER DEFAULT 0,
+    date_completed TIMESTAMP,
     FOREIGN KEY (service_id) REFERENCES Service(service_id),
-    FOREIGN KEY (client_id) REFERENCES Client(id),
-    completed BOOLEAN DEFAULT FALSE,
-    date_completed TIMESTAMP
+    FOREIGN KEY (client_id) REFERENCES Client(id)
 );
 
 CREATE TABLE Review (
-    service_id UUID PRIMARY KEY,
-    client_id UUID PRIMARY KEY,
-    FOREIGN KEY (service_id) REFERENCES Service(service_id),
-    FOREIGN KEY (client_id) REFERENCES Client(id),
+    service_id TEXT,
+    client_id TEXT,
     rating INT,
     comment TEXT,
-    date_pub TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    date_pub TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (service_id, client_id),
+    FOREIGN KEY (service_id) REFERENCES Service(service_id),
+    FOREIGN KEY (client_id) REFERENCES Client(id)
 );
 
 --ACTIONS--
 
-CREATE TRIGGER update_date_completed
+/* CREATE TRIGGER update_date_completed
 AFTER UPDATE ON Demand
 FOR EACH ROW
 WHEN NEW.completed = TRUE AND OLD.completed = FALSE
@@ -126,4 +127,4 @@ BEGIN
     UPDATE Review
     SET date_pub = CURRENT_TIMESTAMP
     WHERE service_id = OLD.service_id AND client_id = OLD.client_id;
-END;
+END; */
