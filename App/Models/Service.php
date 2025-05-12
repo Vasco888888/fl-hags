@@ -1,11 +1,11 @@
 <?php
-namespace App\Models;
 
-use App\Core\Database;
+require_once __DIR__ . '/../Core/Dbh.php';
 
 class Service {
-    public static function all() {
-        $pdo = Database::connect();
+    public function all() {
+        $db = new Dbh();
+        $pdo = $db->connect();
         $query = $pdo->query('SELECT * FROM Service');
         return $query->fetchAll();
     }
