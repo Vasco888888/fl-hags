@@ -13,7 +13,7 @@ class Message extends Dbh {
         $this->text = $text;
     }
 
-    public function create() {
+    public function insertMSG() {
         $query = "INSERT INTO Message (conversation_id, send_id, text) VALUES (:conversation_id, :send_id, :text)";
         $stmt = parent::connect()->prepare($query);
         $stmt->bindParam(":conversation_id", $this->conversation_id);
