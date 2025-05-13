@@ -1,10 +1,9 @@
 <?php
 require_once __DIR__ . '/../Core/Dbh.php';
+
 class Signin extends Dbh {
     private $username;
     private $password;
-    private $email;
-    private $name;
 
     public function __construct($username, $password) {
         $this->username = $username;
@@ -12,7 +11,7 @@ class Signin extends Dbh {
     }
 
     private function checkUserExists() {
-        $query = "SELECT * FROM users WHERE username = :username";
+        $query = "SELECT * FROM User WHERE username = :username";
         $stmt = parent::connect()->prepare($query);
         $stmt->bindParam(":username", $this->username);
         $stmt->execute();
@@ -22,7 +21,7 @@ class Signin extends Dbh {
 
     public function signinUser() {
         if ($this->checkUserExists()) {
-            $query = "SELECT * FROM users WHERE username = :username";
+            $query = "SELECT * FROM User WHERE username = :username";
             $stmt = parent::connect()->prepare($query);
             $stmt->bindParam(":username", $this->username);
             $stmt->execute();
@@ -30,8 +29,6 @@ class Signin extends Dbh {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($this->password, $user['password'])) {
-                $this->email = $user['email'];
-                $this->name = $user['name'];
                 return 0; // Password is correct
             } else {
                 return 1; // Password is incorrect

@@ -2,12 +2,14 @@
 
 require_once __DIR__ . '/../Core/Dbh.php';
 
-class Service {
+class Service extends Dbh{
     public function all() {
-        $db = new Dbh();
-        $pdo = $db->connect();
-        $query = $pdo->query('SELECT * FROM Service');
-        return $query->fetchAll();
+        $query = "SELECT * FROM Service";
+        $stmt = parent::connect()->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getService($id) {}
 }
 ?>

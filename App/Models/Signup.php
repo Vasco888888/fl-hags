@@ -16,7 +16,7 @@ class Signup extends Dbh {
     }
 
     private function checkUserExists() {
-        $query = "SELECT * FROM users WHERE username = :username OR email = :email";
+        $query = "SELECT * FROM User WHERE username = :username OR email = :email";
         $stmt = parent::connect()->prepare($query);
         $stmt->bindParam(":username", $this->username);
         $stmt->bindParam(":email", $this->email);
@@ -30,7 +30,7 @@ class Signup extends Dbh {
     }
 
     private function insertUser() {
-        $query = "INSERT INTO users (name, username, email, password) VALUES
+        $query = "INSERT INTO User (name, username, email, password) VALUES
         (:name, :username, :email, :password)";
 
         $stmt = parent::connect()->prepare($query);
@@ -43,11 +43,12 @@ class Signup extends Dbh {
 
     public function signupUser() {
         if ($this->checkUserExists()) {
-            return "User already exists";
+            return -1;
         } else if (empty($this->username) || empty($this->password) || empty($this->email)) {
+            return 1; // Required fields are empty
         } else {
             $this->insertUser();
-            return "User registered successfully";
+            return 0; // User successfully signed up
         }
     }
 }
