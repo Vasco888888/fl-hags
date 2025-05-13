@@ -21,7 +21,7 @@ CREATE TABLE User (
     email VARCHAR(255),
     password VARCHAR(255),
     img_id INTEGER DEFAULT NULL,
-    FOREIGN KEY (img_id) REFERENCES User_Image(id),
+    FOREIGN KEY (img_id) REFERENCES User_Image(id)
 );
 
 CREATE TABLE Client (
