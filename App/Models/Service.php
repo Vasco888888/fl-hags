@@ -61,10 +61,10 @@ class Service extends Dbh{
         return $service;
     }
 
-    public function getAllServices() {
+    public function getAllServices($category_id) {
         $query = "SELECT * FROM Service WHERE category_id = :category_id";
         $stmt = $this->connect()->prepare($query);
-        $stmt->bindParam(":category_id", $this->category_id);
+        $stmt->bindParam(":category_id", $category_id);
         $stmt->execute();
         $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $services;

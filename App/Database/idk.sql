@@ -16,11 +16,9 @@ CREATE TABLE Service_Media (
 CREATE TABLE User (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(100),
-    username VARCHAR(30),
-    email VARCHAR(255),
-    password VARCHAR(255),
-    img_id INTEGER DEFAULT NULL,
-    FOREIGN KEY (img_id) REFERENCES User_Image(id)
+    username VARCHAR(30) UNIQUE,
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255)
 );
 
 CREATE TABLE Client (

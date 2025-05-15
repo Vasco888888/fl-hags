@@ -22,11 +22,7 @@ class Signup extends Dbh {
         $stmt->bindParam(":email", $this->email);
         $stmt->execute();
 
-        if ($stmt->rowCount() > 0) {
-            return true; // User already exists
-        } else {
-            return false; // User does not exist
-        }
+        return ($stmt->rowCount() > 0); // User already exists
     }
 
     private function insertUser() {
@@ -44,11 +40,16 @@ class Signup extends Dbh {
     public function signupUser() {
         if ($this->checkUserExists()) {
             return -1;
-        } else if (empty($this->username) || empty($this->password) || empty($this->email)) {
-            return 1; // Required fields are empty
         } else {
-            $this->insertUser();
-            return 0; // User successfully signed up
+            try {
+                $this->insertUser();
+                return 0; // User successfully registered
+            } catch (PDOException $e) {
+                if ($e->getCode() == 23000) {
+                    return -1; // Duplicate entry error
+                }
+                throw $e; // Error during insertion
+            }
         }
     }
 }
