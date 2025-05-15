@@ -25,7 +25,7 @@
         if (!empty($msg)) echo "<p style='color:red;'>$msg</p>";
     ?>
 
-    <p>Don't have an account? <a href="/_PROJ/App/Views/signup_view.php">Sign Up</a></p>
+    <p>Don't have an account? <a href="/_PROJ/App/Controllers/signUpController.php">Sign Up</a></p>
 
     <script src="/_PROJ/assets/js/signup.js"></script>
 </body>
