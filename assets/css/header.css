@@ -1,0 +1,38 @@
+.main-header {
+    width: 100%;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 30px;
+    padding: 30px 0 10px 0;
+    background: linear-gradient(90deg, #2a4d69 0%, #4b86b4 100%);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(42,77,105,0.08);
+    position: relative;
+    z-index: 2;
+}
+
+.header-title {
+    font-size: 2.5em;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin: 0;
+    animation: headerPulse 2.5s infinite alternate;
+}
+
+.header-subtitle {
+    font-size: 1.2em;
+    font-weight: 400;
+    margin: 10px 0 0 0;
+    letter-spacing: 1px;
+    opacity: 0.85;
+}
+
+@keyframes headerPulse {
+    0% { text-shadow: 0 0 8px #fff, 0 0 2px #4b86b4; }
+    100% { text-shadow: 0 0 24px #fff, 0 0 8px #4b86b4; }
+}
+
+@keyframes subtitleFade {
+    0% { opacity: 0.85; }
+    100% { opacity: 1; letter-spacing: 3px; }
+}

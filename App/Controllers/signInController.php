@@ -21,5 +21,17 @@
             $msg = "Login successful! Redirecting...";
         }
     }
+
+    
+    $imgDir = __DIR__ . '/../../assets/img/';
+    $imgUrlBase = '/_PROJ/assets/img/';
+    $images = [];
+    foreach (glob($imgDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE) as $img) {
+        $images[] = $imgUrlBase . basename($img);
+    }
+    
+
+    //var_dump($images); // TEMPORARY: See what PHP finds
+
     include __DIR__ . '/../Views/signin_view.php';
 ?>

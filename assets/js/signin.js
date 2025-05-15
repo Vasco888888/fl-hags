@@ -16,3 +16,18 @@ document.getElementById('signinForm').addEventListener('submit', function(e) {
         document.getElementById('errorMsg').textContent = error;
     }
 });
+
+// Background slider logic
+
+document.addEventListener('DOMContentLoaded', function() {
+    let current = 0;
+    const slider = document.getElementById('background-slider');
+
+    function showNextImage() {
+        if (!images || images.length === 0) return;
+        slider.style.backgroundImage = `url('${images[current]}')`;
+        current = (current + 1) % images.length;
+    }
+    showNextImage();
+    setInterval(showNextImage, 5000);
+});
