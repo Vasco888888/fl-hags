@@ -2,7 +2,7 @@
 class mainController {
     public function index() {
         $imgDir = __DIR__ . '/../../assets/img/';
-        $imgUrlBase = '/_PROJ/assets/img/';
+        $imgUrlBase = '/assets/img/';
         $images = [];
         foreach (glob($imgDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE) as $img) {
             $images[] = $imgUrlBase . basename($img);
