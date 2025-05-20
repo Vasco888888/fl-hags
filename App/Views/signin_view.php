@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
-    <link rel="stylesheet" href="/_PROJ/assets/css/signIn.css">
+    <link rel="stylesheet" href="/assets/css/signIn.css">
 </head>
 <body>
     <div class="signin-container">
@@ -27,14 +27,14 @@
             if (!empty($msg)) echo "<p style='color:red;'>$msg</p>";
         ?>
 
-        <p>Don't have an account? <a href="/_PROJ/App/Controllers/signUpController.php">Sign Up</a></p>
+        <p>Don't have an account? <a href="index.php?page=signUp">Sign Up</a></p>
     </div>
     <div id="background-slider"></div>
     <script>
         const images = <?php echo json_encode($images); ?>;
         console.log(images); //for debugging
     </script>
-    <script src="/_PROJ/assets/js/signin.js"></script>
+    <script src="/assets/js/signin.js"></script>
 </body>
 </html>
 

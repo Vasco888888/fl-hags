@@ -1,4 +1,5 @@
 <?php
-    header("Location: /_PROJ/App/Views/main_page_view.php");
-    exit;
-?>
+require_once __DIR__ . '/App/Core/Router.php';
+
+$router = new Router();
+$router->handleRequest();

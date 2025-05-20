@@ -1,6 +1,5 @@
 .main-header {
     width: 100%;
-    text-align: center;
     margin-top: 0;
     margin-bottom: 30px;
     padding: 30px 0 10px 0;
@@ -9,6 +8,32 @@
     box-shadow: 0 2px 12px rgba(42,77,105,0.08);
     position: relative;
     z-index: 2;
+}
+
+.header-flex {
+    display: flex;
+    padding: 0 30px; /* match left/right margin to top/bottom padding */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    flex-direction: row; /* logo right, text left */
+    gap: 15px;
+}
+
+.header-flex.logged-in {
+    justify-content: space-between;
+    text-align: left;
+}
+
+.header-flex.logged-out .header-left {
+    justify-content: center;
+    text-align: center;
+}
+
+.header-flex.logged-out .header-text {
+    align-items: center;
 }
 
 .header-title {
@@ -27,6 +52,49 @@
     opacity: 0.85;
 }
 
+.header-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin-left: 15px; /* space between text and logo */
+    margin-right: 0;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signout-form {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.signout-btn {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #228B22;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: background 0.2s;
+    margin: 0 0 0 30px; /* left margin to separate from content */
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.signout-btn:hover {
+    background: #4CAF50;
+}
+
 @keyframes headerPulse {
     0% { text-shadow: 0 0 8px #fff, 0 0 2px #4CAF50; }
     100% { text-shadow: 0 0 24px #fff, 0 0 8px #4CAF50; }
@@ -36,3 +104,4 @@
     0% { opacity: 0.85; }
     100% { opacity: 1; letter-spacing: 3px; }
 }
+

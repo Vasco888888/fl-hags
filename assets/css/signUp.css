@@ -1,3 +1,12 @@
+body,
+button,
+input,
+select,
+textarea,
+a {
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
 body {
     background: linear-gradient(120deg, #f0f4f8, #c9e7ff 80%);
     font-family: 'Segoe UI', Arial, sans-serif;

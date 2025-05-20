@@ -1,6 +1,17 @@
 <header class="main-header">
-    <h1 class="header-title">FL\HAGS</h1>
-    <h2 class="header-subtitle">FreeLance - Home And Garden Services</h2>
+    <div class="header-flex <?php echo isset($_SESSION['username']) ? 'logged-in' : 'logged-out'; ?>">
+        <div class="header-left">
+            <img src="/assets/img/logo/logo.png" alt="Logo" class="header-logo">
+            <div class="header-text">
+                <h1 class="header-title">FL\HAGS</h1>
+                <h2 class="header-subtitle">FreeLance - Home And Garden Services</h2>
+            </div>
+        </div>
+        <?php if (isset($_SESSION['username'])): ?>
+            <form action="index.php?page=signOut" method="post" class="signout-form">
+                <button type="submit" class="signout-btn">Sign Out</button>
+            </form>
+        <?php endif; ?>
+    </div>
 </header>
-
-<link rel="stylesheet" href="/_PROJ/assets/css/header.css">
+<link rel="stylesheet" href="/assets/css/header.css">
