@@ -25,22 +25,18 @@ class editController {
                     }
                 }
                 if (!empty($_POST['name'])) {
-                    $result = $user->setUsername($_POST['name']);
-                    if ($result !== -1) {
-                        $_SESSION['name'] = $_POST['name'];
-                    }
+                    $user->setName($_POST['name']);
+                    $_SESSION['name'] = $_POST['name'];
                 }
                 if (!empty($_POST['email'])) {
-                    $result = $user->setUsername($_POST['email']);
+                    $result = $user->setEmail($_POST['email']);
                     if ($result !== -1) {
                         $_SESSION['email'] = $_POST['email'];
                     }
                 }
                 if (!empty($_POST['password'])) {
-                    $result = $user->setUsername($_POST['password']);
-                    if ($result !== -1) {
-                        $_SESSION['password'] = $_POST['password'];
-                    }
+                    $user->setPassword($_POST['password']);
+                    // Don't store password in session!
                 }
                 // Redirect to user profile/dashboard after update
                 header("Location: index.php?page=user");

@@ -1,0 +1,60 @@
+body {
+    background: #f6f8fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.user-profile-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 32px 28px;
+}
+
+h2, h3 {
+    color: #228B22;
+    margin-top: 0;
+}
+
+.user-info {
+    margin-bottom: 28px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 18px;
+}
+
+.user-info p {
+    margin: 8px 0;
+    color: #222;
+}
+
+.main-btn {
+    background: #228B22;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+    box-shadow: 0 1px 4px rgba(34,139,34,0.08);
+}
+.main-btn:hover {
+    background: #176617;
+}
+
+.user-orders, .user-services {
+    margin-bottom: 28px;
+}
+
+.user-orders ul, .user-services ul {
+    padding-left: 20px;
+}
+
+.user-orders li, .user-services li {
+    margin-bottom: 7px;
+    color: #333;
+}
