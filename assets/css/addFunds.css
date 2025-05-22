@@ -1,0 +1,48 @@
+.funds-form {
+    max-width: 350px;
+    margin: 60px auto;
+    padding: 32px 24px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.funds-options label {
+    margin-right: 18px;
+}
+.other-amount-input {
+    display: none;
+    margin-top: 10px;
+}
+.main-btn {
+    background: #228B22;
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.main-btn:hover {
+    background: #1a6b1a;
+}
+.card-sim-section {
+    margin-top: 20px;
+    padding: 18px 0 0 0;
+    border-top: 1px solid #eee;
+}
+.card-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+.card-fields input {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
