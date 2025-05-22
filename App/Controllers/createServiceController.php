@@ -3,10 +3,12 @@
 require_once __DIR__ . '/../Models/Category.php';
 require_once __DIR__ . '/../Models/Service.php';
 require_once __DIR__ . '/../Models/Service_Media.php';
+require_once __DIR__ . '/../Models/User.php';
 
 class createServiceController {
     public function index() {
         // Load categories for dropdown
+        session_start();
         $categoryModel = new Category();
         $categories = $categoryModel->getAllCategories();
         $categoryOptions = '';
@@ -24,7 +26,8 @@ class createServiceController {
             $category_id = intval($_POST['category'] ?? 0);
 
             if ($title && $description && $base_price > 0) {
-                $freelancer_id = $_SESSION['user_id'] ?? 1; // fallback for demo
+                $user = new User($_SESSION['username']);
+                $freelancer_id = $user->getID();
                 $service = new Service($freelancer_id, $category_id, $title, $description, $base_price);
                 $service_id = $service->createService();
 
@@ -52,6 +55,8 @@ class createServiceController {
                     }
                 }
                 $success = true;
+                header ("Location: index.php?page=allService");
+                exit;
             } else {
                 $error = "Please fill all required fields.";
             }

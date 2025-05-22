@@ -22,7 +22,13 @@ class Signup extends Dbh {
         $stmt->bindParam(":email", $this->email);
         $stmt->execute();
 
-        return ($stmt->rowCount() > 0); // User already exists
+        if ($stmt->rowCount() > 0) { // User already exists
+            $stmt = null;
+            return true;
+        }
+
+        $stmt = null;
+        return false; // User does not exist
     }
 
     private function insertUser() {
@@ -35,6 +41,19 @@ class Signup extends Dbh {
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":password", $this->password);
         $stmt->execute();
+        $stmt = null;
+
+
+        $query = "INSERT INTO Freelancer (id) VALUES (:id)";
+        $stmt = parent::connect()->prepare($query);
+        $stmt->bindParam(":id", parent::connect()->lastInsertId());
+        $stmt->execute();
+        $stmt = null;
+        $query = "INSERT INTO Client (id) VALUES (:id)";
+        $stmt = parent::connect()->prepare($query);
+        $stmt->bindParam(":id", parent::connect()->lastInsertId());
+        $stmt->execute();
+        $stmt = null;
     }
 
     public function signupUser() {

@@ -7,6 +7,13 @@ class serviceController {
         require_once __DIR__ . '/../Models/Service_Media.php';
         require_once __DIR__ . '/../Models/User.php';
 
+        // Get service_id from GET parameters
+        $service_id = $_POST['service_id'] ?? null;
+        if (!$service_id) {
+            echo "Service not found.";
+            exit;
+        }
+
         $serviceModel = new Service();
         $service = $serviceModel->getService($service_id);
 

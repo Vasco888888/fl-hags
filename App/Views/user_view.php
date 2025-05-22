@@ -43,21 +43,42 @@
 
         <h3>Your Services</h3>
         <div class="user-services">
+            <?php
+            require_once __DIR__ . '/../Models/Service_Media.php';
+            require_once __DIR__ . '/../Models/Review.php';
+            $mediaModel = new Service_Media();
+            $reviewModel = new Review();
+            ?>
             <?php if (empty($services)): ?>
                 <p>No services found.</p>
             <?php else: ?>
-                <ul>
+                <ul class="service-list">
                     <?php foreach ($services as $service): ?>
-                        <li>
-                            <?= htmlspecialchars($service['title']) ?> - €<?= number_format($service['base_price'], 2) ?>
+                        <li class="service-item" style="display:flex;align-items:center;gap:12px;">
+                            <?php
+                                // Get main image path
+                                $imgPath = $mediaModel->getMainImage($service['service_id']);
+                                // Get average rating
+                                $rating = $reviewModel->getAverageRating($service['service_id']);
+                            ?>
+                            <?php if ($imgPath): ?>
+                                <img src="<?= htmlspecialchars($imgPath) ?>" alt="Service Image" style="width:48px;height:48px;object-fit:cover;border-radius:6px;">
+                            <?php else: ?>
+                                <div style="width:48px;height:48px;background:#eee;border-radius:6px;display:flex;align-items:center;justify-content:center;">No Image</div>
+                            <?php endif; ?>
+                            <span style="font-weight:500;"><?= htmlspecialchars($service['title']) ?></span>
+                            <span style="color:#FFA500;margin-left:8px;">★ <?= number_format($rating, 1) ?></span>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
         </div>
 
-        <form action="index.php?page=chat" method="get">
+        <form action="index.php?page=chat" method="post" style="display:inline;">
             <button type="submit" class="main-btn">Go to Chat</button>
+        </form>
+        <form action="index.php?page=allService" method="post" style="display:inline;">
+            <button type="submit" class="main-btn" style="margin-left:10px;">Back to All Services</button>
         </form>
     </div>
     <script src="/assets/js/user.js"></script>

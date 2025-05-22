@@ -60,7 +60,10 @@ class allServiceController {
                         <span class="service-price">€ ' . htmlspecialchars($service['base_price']) . '</span>
                         <span class="service-rating">' . $ratingText . '</span>
                     </div>
-                    <a href="index.php?page=service&service_id=' . $service['service_id'] . '" class="main-btn">View</a>
+                    <form action="index.php?page=service" method="post" style="display:inline;">
+                        <input type="hidden" name="service_id" value="' . htmlspecialchars($service['service_id']) . '">
+                        <button type="submit" class="main-btn">View</button>
+                    </form>
                 </div>
             ';
         }
