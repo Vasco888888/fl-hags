@@ -13,7 +13,7 @@
     <div class="signup-container">
         <h2 class="form-title">Sign Up</h2>
         <form id="signupForm" method="post" action="">
-            <label>Name: <br> 
+            <label>First Name: <br> 
             <input type="text" name="name" required></label><br>
             <label>Username: <br> 
             <input type="text" name="username" required></label><br>

@@ -25,10 +25,14 @@
     <div class="service-description">
         <h2>Description</h2>
         <p><?php echo nl2br(htmlspecialchars($service['description'])); ?></p>
-    </div>
+    </div> 
     <div class="service-actions">
-        <a href="/App/Controllers/paymentController.php?service_id=<?php echo $service_id; ?>" class="order-btn">Order Now</a>
-        <a href="/App/Controllers/chatController.php?freelancer_id=<?php echo $freelancer_id; ?>" class="chat-btn">Contact Freelancer</a>
+        <form action="index.php?page=chat" method="post" style="display:inline;">
+            <input type="hidden" name="freelancer_id" value="<?= htmlspecialchars($freelancer_id) ?>">
+            <input type="hidden" name="service_id" value="<?= htmlspecialchars($service_id) ?>">
+            <input type="hidden" name="start_conversation" value="1">
+            <button type="submit" class="chat-btn">Contact Freelancer</button>
+        </form>
     </div>
 </div>
 </body>

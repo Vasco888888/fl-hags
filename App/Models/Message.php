@@ -13,16 +13,16 @@ class Message extends Dbh {
         $this->text = $text;
     }
 
-    public function insertMSG() {
+    public static function sendMessage($conversation_id, $send_id, $text) {
+        $db = (new self())->connect();
         $query = "INSERT INTO Message (conversation_id, send_id, text) VALUES (:conversation_id, :send_id, :text)";
-        $stmt = parent::connect()->prepare($query);
-        $stmt->bindParam(":conversation_id", $this->conversation_id);
-        $stmt->bindParam(":send_id", $this->send_id);
-        $stmt->bindParam(":text", $this->text);
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":conversation_id", $conversation_id);
+        $stmt->bindParam(":send_id", $send_id);
+        $stmt->bindParam(":text", $text);
         $stmt->execute();
         $stmt = null;
-        $this->message_id = parent::connect()->lastInsertId();
-        return $this->message_id;
+        return $db->lastInsertId();
     }
 } 
 ?>

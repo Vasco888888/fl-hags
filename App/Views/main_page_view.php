@@ -9,7 +9,7 @@
     <title>Welcome | Freelance Platform</title>
     <link rel="stylesheet" href="/assets/css/main_page.css">
 </head>
-<body>
+<body> 
     <div class="main-container">
         <h1 class="main-title">FL\HAGS</h1>
         <p class="subtitle">Find the right freelancer for your needs</p>

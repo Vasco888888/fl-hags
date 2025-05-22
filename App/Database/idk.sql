@@ -107,3 +107,11 @@ CREATE TABLE UserTransaction (
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (order_id) REFERENCES Demand(order_id)
 );
+
+/* CREATE TABLE Proposal (
+    proposal_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    conversation_id INTEGER,
+    price DECIMAL(10,2),
+    status TEXT DEFAULT 'pending', -- 'pending', 'accepted', 'refused'
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+); */

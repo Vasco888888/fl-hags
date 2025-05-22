@@ -6,7 +6,7 @@
     <title>Create Service</title>
     <link rel="stylesheet" href="/assets/css/createService.css">
 </head>
-<body>
+<body> 
     <div class="main-container">
         <h1>Create a New Service</h1>
         <?php if (!empty($success)): ?>

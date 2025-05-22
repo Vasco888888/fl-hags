@@ -1,10 +1,33 @@
 window.addEventListener('DOMContentLoaded', function() {
+    // Forbid special characters in cardholder name and address (but allow spaces)
+    const forbidden = /['";<>-]/;
+
+    const form = document.querySelector('.funds-form');
+    const ccName = document.getElementById('ccName');
+    const ccAddress = document.getElementById('ccAddress');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', function(e) {
+        // Only validate if card section is visible
+        if (document.getElementById('cardSimSection').style.display !== 'none') {
+            if (forbidden.test(ccName.value)) {
+                e.preventDefault();
+                alert("Invalid characters detected in Cardholder Name.");
+                return;
+            }
+            if (forbidden.test(ccAddress.value)) {
+                e.preventDefault();
+                alert("Invalid characters detected in Card Address.");
+                return;
+            }
+        }
+    });
+
     const radios = document.querySelectorAll('input[name="amount"]');
     const otherRadio = document.getElementById('otherRadio');
     const otherAmountDiv = document.getElementById('otherAmountDiv');
     const otherAmountInput = document.getElementById('otherAmount');
     const cardSimSection = document.getElementById('cardSimSection');
-    const form = document.querySelector('.funds-form');
 
     function toggleCardSection() {
         let show = false;
@@ -35,8 +58,6 @@ window.addEventListener('DOMContentLoaded', function() {
         // Only validate if card section is visible
         if (cardSimSection.style.display !== 'none') {
             const ccNumber = document.getElementById('ccNumber').value.trim();
-            const ccName = document.getElementById('ccName').value.trim();
-            const ccAddress = document.getElementById('ccAddress').value.trim();
             const ccExpiry = document.getElementById('ccExpiry').value;
             const ccCVV = document.getElementById('ccCVV').value.trim();
 
@@ -47,13 +68,13 @@ window.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             // Name
-            if (ccName.length < 2) {
+            if (ccName.value.trim().length < 2) {
                 alert('Please enter the cardholder name.');
                 e.preventDefault();
                 return;
             }
             // Address
-            if (ccAddress.length < 4) {
+            if (ccAddress.value.trim().length < 4) {
                 alert('Please enter the card address.');
                 e.preventDefault();
                 return;

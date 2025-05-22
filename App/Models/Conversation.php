@@ -6,11 +6,20 @@ class Conversation extends Dbh {
     private $service_id;
     private $client_id;
     private $freelancer_id;
+    private $service_title;
 
     public function __construct($client_id = null, $freelancer_id = null, $service_id = null) {
         $this->client_id = $client_id;
         $this->freelancer_id = $freelancer_id;
         $this->service_id = $service_id;
+    }
+
+    public function setId($conversation_id) {
+        $this->conversation_id = $conversation_id;
+    }
+
+    public function getId() {
+        return $this->conversation_id;
     }
 
     private function checkConversationExists() {
@@ -50,7 +59,10 @@ class Conversation extends Dbh {
         return $messages; // Return all messages in the conversation
     }
 
-    public function openConversation() {
+    public function openConversation($conversation_id = null) {
+        if ($conversation_id) {
+            $this->conversation_id = $conversation_id;
+        }
         if ($this->checkConversationExists()) {
             // Fetch all messages for the existing conversation
             return $this->loadConversation();
@@ -69,6 +81,18 @@ class Conversation extends Dbh {
         $convo = $stmt->fetchAll(PDO::FETCH_ASSOC); 
         $stmt = null;
         return $convo; // Return all conversations for the user
+    }
+
+    public function getConvoTitle($conversation_id) {
+        $query = "SELECT service.title FROM Conversation
+                  JOIN Service ON Conversation.service_id = Service.service_id
+                  WHERE Conversation.conversation_id = :conversation_id";
+        $stmt = parent::connect()->prepare($query);
+        $stmt->bindParam(":conversation_id", $conversation_id);
+        $stmt->execute();
+        $this->service_title = $stmt->fetchColumn(); // Fetch the service title
+        $stmt = null;
+        return $this->service_title; // Return the service title
     }
 }
 ?> 

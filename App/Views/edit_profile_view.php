@@ -12,7 +12,7 @@
 
     <h2 class="form-title">Edit Profile</h2>
     <?php if (!empty($msg)) echo "<div style='color:green;'>$msg</div>"; ?>
-    <form method="post">
+    <form method="post"> 
         <label>New Name:<br>
             <input type="text" name="name" value="<?php echo htmlspecialchars($userData['name']); ?>">
         </label><br>

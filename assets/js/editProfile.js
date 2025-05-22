@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('form').addEventListener('submit', function(e) {
-        const forbidden = /['";<>-]/;
+        const forbidden = /['";<>-\s]/;
         let error = "";
 
         // Collect field values

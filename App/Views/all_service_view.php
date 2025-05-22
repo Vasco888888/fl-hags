@@ -35,7 +35,7 @@
                 <option value="3" <?= (($_GET['min_rating'] ?? '') == 3) ? 'selected' : '' ?>>3★ and up</option>
                 <option value="4" <?= (($_GET['min_rating'] ?? '') == 4) ? 'selected' : '' ?>>4★ and up</option>
                 <option value="5" <?= (($_GET['min_rating'] ?? '') == 5) ? 'selected' : '' ?>>5★</option>
-            </select>
+            </select> 
             <select name="sort">
                 <option value="asc" <?= (($_GET['sort'] ?? '') == 'asc') ? 'selected' : '' ?>>Price ↑</option>
                 <option value="desc" <?= (($_GET['sort'] ?? '') == 'desc') ? 'selected' : '' ?>>Price ↓</option>

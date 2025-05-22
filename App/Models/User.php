@@ -51,14 +51,15 @@ class User extends Dbh {
         return $this->balance;
     }
 
-    public function getNameById($user_id) {
-        $query = "SELECT name FROM User WHERE id = :id";
-        $stmt = $this->connect()->prepare($query);
+    public static function getNameById($user_id) {
+        $db = new self();
+        $query = "SELECT * FROM User WHERE id = :id";
+        $stmt = $db->connect()->prepare($query);
         $stmt->bindParam(":id", $user_id);
         $stmt->execute();
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
         $stmt = null;
-        return $user ? $user['name'] : null;
+        return $user['name'];
     }
 
     # Setters
@@ -172,5 +173,7 @@ class User extends Dbh {
         $stmt = null;
         return 0; // Success
     }
+
+    
 }
 ?>

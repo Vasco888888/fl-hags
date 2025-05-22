@@ -1,0 +1,141 @@
+body {
+    background: #f6f8fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-container {
+    display: flex;
+    max-width: 900px;
+    height: 80vh;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.chat-sidebar {
+    width: 240px;
+    background: #f0f0f0;
+    border-right: 1px solid #e0e0e0;
+    padding: 20px 0;
+    overflow-y: auto;
+}
+
+.chat-sidebar h3 {
+    text-align: center;
+    color: #228B22;
+    margin: 0 0 10px 0;
+}
+
+.conversation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.conversation-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 12px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    color: #222;
+    border-radius: 0;
+    transition: background 0.2s;
+}
+
+.conversation-btn.active, .conversation-btn:hover {
+    background: #e0ffe0;
+}
+
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.chat-empty {
+    margin: auto;
+    color: #888;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chat-message {
+    background: #e6e6e6;
+    border-radius: 8px;
+    padding: 8px 14px;
+    max-width: 60%;
+    align-self: flex-start;
+    word-break: break-word;
+}
+
+.chat-message.me {
+    background: #d4ffd4;
+    align-self: flex-end;
+}
+
+.chat-author {
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.chat-send-form {
+    display: flex;
+    border-top: 1px solid #e0e0e0;
+    padding: 12px;
+    background: #fff;
+}
+
+.chat-send-form input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.main-btn {
+    background: #228B22;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.main-btn:hover {
+    background: #176617;
+}
+
+.chat-header {
+    width: 100%;
+    background: #eaffea;
+    border-bottom: 1px solid #d0e6d0;
+    color: #228B22;
+    font-weight: bold;
+    font-size: 1.15em;
+    padding: 16px 24px;
+    box-sizing: border-box;
+    text-align: left;
+    letter-spacing: 0.5px;
+}

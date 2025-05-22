@@ -1,5 +1,5 @@
 document.getElementById('signupForm').addEventListener('submit', function(e) {
-    const forbidden = /['";<>-]/;
+    const forbidden = /['";<>-\s]/;
     let error = "";
     const fields = ['name', 'username', 'email', 'password'];
     fields.forEach(function(field) {
