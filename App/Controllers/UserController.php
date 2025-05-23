@@ -11,7 +11,7 @@ class userController {
         $user = new User($_SESSION['username']);
 
         // Get orders (demands) for this user (as client)
-        $orders = (new Demand())->getDemandsByClient($user->getID());
+        $orders = (new Demand())->getDemandsCompletedByClient($user->getID());
 
         // Get services for this user (as freelancer)
         $services = (new Service())->getFreelancerServices($user->getID());

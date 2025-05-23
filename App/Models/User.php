@@ -62,10 +62,22 @@ class User extends Dbh {
         return $user['name'];
     }
 
+    public static function getBalanceById($user_id) {
+        $db = (new self())->connect();
+        $query = "SELECT balance FROM User WHERE id = :user_id";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":user_id", $user_id);
+        $stmt->execute();
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $stmt = null;
+        return $user['balance'];
+    }
+
     # Setters
     public function setUsername($newUsername) {
+        $db = $this->connect();
         $query = "SELECT * FROM User WHERE username = :newUsername";
-        $stmt = $this->connect()->prepare($query);
+        $stmt = $db->prepare($query);
         $stmt->bindParam(":newUsername", $newUsername);
         $stmt->execute();
         if ($stmt->rowCount() > 0) {
@@ -75,7 +87,7 @@ class User extends Dbh {
         $stmt = null;
 
         $query2 = "UPDATE User SET username = :newUsername WHERE id = :id";
-        $stmt2 = $this->connect()->prepare($query2);
+        $stmt2 = $db->prepare($query2);
         $stmt2->bindParam(":newUsername", $newUsername);
         $stmt2->bindParam(":id", $this->userID);
         $stmt2->execute();
@@ -94,8 +106,9 @@ class User extends Dbh {
         $this->name = $newName;
     }
     public function setEmail($newEmail) {
+        $db = $this->connect();
         $query = "SELECT * FROM User WHERE email = :newEmail";
-        $stmt = $this->connect()->prepare($query);
+        $stmt = $db->prepare($query);
         $stmt->bindParam(":newEmail", $newEmail);
         $stmt->execute();
         
@@ -106,7 +119,7 @@ class User extends Dbh {
         $stmt = null;
 
         $query2 = "UPDATE User SET email = :newEmail WHERE id = :id";
-        $stmt2 = $this->connect()->prepare($query2);
+        $stmt2 = $db->prepare($query2);
         $stmt2->bindParam(":newEmail", $newEmail);
         $stmt2->bindParam(":id", $this->userID);
         $stmt2->execute();
@@ -144,35 +157,42 @@ class User extends Dbh {
     }
 
 
-    public static function addBalance($user_id, $addBalance) {
-        $db = new self();
-        $blc = $addBalance * 0.95; // 5% fee
-        $query = "UPDATE User SET balance = balance + :addBalance WHERE id = :user_id";
-        $stmt = $db->connect()->prepare($query);
-        $stmt->bindParam(":addBalance", $blc);
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->execute();
-        $stmt = null;
-    }
-    public static function subBalance($user_id, $subBalance) {
-        $db = new self();
-        $query = "SELECT balance FROM User WHERE id = :user_id";
-        $stmt = $db->connect()->prepare($query);
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->execute();
-        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $stmt = null;
-        if ($user['balance'] < $subBalance) {
-            return -1; // Not enough balance
+    public static function addBalance($db, $user_id, $amount) {
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        try {
+            $stmt = $db->prepare("UPDATE User SET balance = balance + :amount WHERE id = :uid");
+            $stmt->execute([':amount' => $amount, ':uid' => $user_id]);
+            return true;
+        } catch (PDOException $e) {
+            error_log("[User::addBalance] Error: " . $e->getMessage());
+            return false;
         }
-        $query = "UPDATE User SET balance = balance - :subBalance WHERE id = :user_id";
-        $stmt = $db->connect()->prepare($query);
-        $stmt->bindParam(":subBalance", $subBalance);
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->execute();
-        $stmt = null;
-        return 0; // Success
     }
+
+    public static function subBalance($db, $user_id, $amount) {
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        try {
+            $stmt = $db->prepare("SELECT balance FROM User WHERE id = :uid");
+            $stmt->execute([':uid' => $user_id]);
+            $balance = $stmt->fetchColumn();
+
+            if ($balance === false || $balance < $amount) {
+                error_log("[User::subBalance] Insufficient balance or user not found. ID={$user_id}");
+                return -1;
+            }
+
+            $stmt = $db->prepare("UPDATE User SET balance = balance - :amount WHERE id = :uid");
+            $stmt->execute([':amount' => $amount, ':uid' => $user_id]);
+
+            return true;
+        } catch (PDOException $e) {
+            error_log("[User::subBalance] Error: " . $e->getMessage());
+            return -1;
+        }
+    }
+
 
     
 }

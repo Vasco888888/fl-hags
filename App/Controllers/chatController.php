@@ -4,55 +4,17 @@ class chatController {
         session_start();
         require_once __DIR__ . '/../Models/Conversation.php';
         require_once __DIR__ . '/../Models/User.php';
-        require_once __DIR__ . '/../Models/Proposal.php';
-        require_once __DIR__ . '/../Models/Transaction.php';
 
         $user = new User($_SESSION['username']);
         $user_id = $user->getID();
 
-        // Propose price (freelancer)
-        if (isset($_POST['ajax_propose_price'])) {
-            $conversation_id = $_POST['conversation_id'];
-            $price = floatval($_POST['proposed_price']);
-            $proposalModel = new Proposal();
-            $proposalModel->createProposal($conversation_id, $price);
-            echo json_encode(['success' => true]);
-            exit;
-        }
-
-        // Accept proposal (client)
-        if (isset($_POST['ajax_accept_proposal'])) {
-            $proposal_id = $_POST['proposal_id'];
-            $conversation_id = $_POST['conversation_id'];
-            $proposalModel = new Proposal();
-            $proposal = $proposalModel->getPendingProposal($conversation_id);
-            if ($proposal && $proposal['proposal_id'] == $proposal_id) {
-                $proposalModel->updateStatus($proposal_id, 'accepted');
-                // Create transaction (implement your Transaction model accordingly)
-                $transactionModel = new Transaction();
-                $transactionModel->createTransaction($conversation_id, $proposal['price']);
-            }
-            echo json_encode(['success' => true]);
-            exit;
-        }
-
-        // Refuse proposal (client)
-        if (isset($_POST['ajax_refuse_proposal'])) {
-            $proposal_id = $_POST['proposal_id'];
-            $proposalModel = new Proposal();
-            $proposalModel->updateStatus($proposal_id, 'refused');
-            echo json_encode(['success' => true]);
-            exit;
-        }
-
-        // AJAX: Fetch messages and proposal for a conversation
+        // AJAX: Fetch messages for a conversation
         if (isset($_POST['ajax_get_messages'])) {
             $conversation_id = $_POST['conversation_id'] ?? null;
             $messages = [];
             $serviceTitle = '';
             $is_freelancer = false;
             $is_client = false;
-            $pending_proposal = null;
             if ($conversation_id) {
                 $conversationModel = new Conversation();
                 $conversations = $conversationModel->getConversationsByUser($user_id);
@@ -67,9 +29,6 @@ class chatController {
                             $msg['sender_name'] = User::getNameById($msg['send_id']) ?? 'Unknown';
                         }
                         $serviceTitle = $conversationModel->getConvoTitle($conversation_id);
-                        // Get pending proposal
-                        $proposalModel = new Proposal();
-                        $pending_proposal = $proposalModel->getPendingProposal($conversation_id);
                         break;
                     }
                 }
@@ -80,8 +39,7 @@ class chatController {
                 'user_id' => $user_id,
                 'service_title' => $serviceTitle,
                 'is_freelancer' => $is_freelancer,
-                'is_client' => $is_client,
-                'pending_proposal' => $pending_proposal
+                'is_client' => $is_client
             ]);
             exit;
         }
@@ -107,9 +65,16 @@ class chatController {
             $service_id = $_POST['service_id'] ?? null;
             if ($freelancer_id && $service_id) {
                 $client_id = $user_id;
-                $conversationModel = new Conversation($client_id, $freelancer_id, $service_id);
-                $conversationModel->openConversation(); // Will create if not exists
-                $conversation_id = $conversationModel->getId();
+
+                // 1. Create the order (demand) first
+                require_once __DIR__ . '/../Models/Demand.php';
+                $demandModel = new Demand($service_id, $client_id);
+                $order_id = $demandModel->createDemand();
+
+                // 2. Then create the conversation with the order_id
+                $conversationModel = new Conversation($client_id, $freelancer_id, $service_id, $order_id);
+                $conversationModel->openConversation();
+
                 // Redirect to chat and open this conversation using POST
                 echo '
                 <form id="redirectForm" action="index.php?page=chat" method="post">
@@ -152,18 +117,13 @@ class chatController {
 
         // After determining $selected_conversation_id and $serviceTitle
         $order_id = null;
+        $conv = null;
         if ($selected_conversation_id) {
-            // You need to get the order_id for this conversation
-            // Assuming you have a method to get the order by service_id and client_id
             $conversationModel = new Conversation();
-            $conv = $conversationModel->getConversationById($selected_conversation_id);
-            if ($conv) {
-                require_once __DIR__ . '/../Models/Demand.php';
-                $demandModel = new Demand();
-                $order = $demandModel->getDemandByServiceAndClient($conv['service_id'], $conv['client_id']);
-                if ($order) {
-                    $order_id = $order['order_id'];
-                }
+            // Fetch the full conversation data (must include order_id)
+            $conv = $conversationModel->getConvoFromId($selected_conversation_id);
+            if ($conv && isset($conv['order_id'])) {
+                $order_id = $conv['order_id'];
             }
         }
 

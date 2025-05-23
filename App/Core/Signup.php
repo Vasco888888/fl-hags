@@ -46,12 +46,13 @@ class Signup extends Dbh {
 
         $query = "INSERT INTO Freelancer (id) VALUES (:id)";
         $stmt = parent::connect()->prepare($query);
-        $stmt->bindParam(":id", parent::connect()->lastInsertId());
+        $lastId = parent::connect()->lastInsertId();
+        $stmt->bindParam(":id", $lastId);
         $stmt->execute();
         $stmt = null;
         $query = "INSERT INTO Client (id) VALUES (:id)";
         $stmt = parent::connect()->prepare($query);
-        $stmt->bindParam(":id", parent::connect()->lastInsertId());
+        $stmt->bindParam(":id", $lastId);
         $stmt->execute();
         $stmt = null;
     }

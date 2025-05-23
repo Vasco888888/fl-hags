@@ -19,10 +19,10 @@
             </form>
         </div>
 
-        <h3>Your Orders</h3>
+        <h3>Your Completed Orders</h3>
         <div class="user-orders">
             <?php if (empty($orders)): ?>
-                <p>No pending orders found.</p>
+                <p>you have no completed orders.</p>
             <?php else: ?>
                 <ul>
                     <?php foreach ($orders as $order): ?>
@@ -48,7 +48,7 @@
             $reviewModel = new Review();
             ?>
             <?php if (empty($services)): ?>
-                <p>No services found.</p>
+                <p>You Havent Created a Service</p>
             <?php else: ?>
                 <ul class="service-list">
                     <?php foreach ($services as $service): ?>

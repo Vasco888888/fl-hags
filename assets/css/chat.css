@@ -139,3 +139,14 @@ body {
     text-align: left;
     letter-spacing: 0.5px;
 }
+
+.transaction-btn {
+    background: #e0ffe0;
+    color: #228B22;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}

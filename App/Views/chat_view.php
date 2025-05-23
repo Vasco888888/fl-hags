@@ -27,15 +27,17 @@
     <div class="chat-main">
         <div class="chat-header">
             <?= !empty($serviceTitle) ? htmlspecialchars($serviceTitle) : 'Select a conversation' ?>
-            <?php if (!empty($order_id)): ?>
-                <form method="post" action="index.php?page=transaction" style="display:inline;">
-                    <input type="hidden" name="order_id" value="<?= htmlspecialchars($order_id) ?>">
-                    <button type="submit" class="main-btn" style="margin-left:20px;">Go to Transaction</button>
-                </form>
-            <?php endif; ?>
         </div>
         <div class="chat-empty">Talk to your client or freelancer here!</div>
     </div>
+    <?php if (!empty($order_id)): ?>
+        <div class="transaction-btn">
+            <form method="post" action="index.php?page=transaction" style="display:inline;">
+                <input type="hidden" name="order_id" value="<?= htmlspecialchars($order_id) ?>">
+                <button type="submit" class="main-btn">Go to Transaction</button>
+            </form>
+        </div>
+    <?php endif; ?>
 </div>
 <script>
     var selectedConversationId = <?= json_encode($selected_conversation_id ?? null) ?>;

@@ -7,10 +7,9 @@
         private $client_id;
         private $completed;
 
-        public function __construct($order_id = null, $service_id = null, $client_id = null) {
+        public function __construct($service_id = null, $client_id = null) {
             $this->service_id = $service_id;
             $this->client_id = $client_id;
-            $this->order_id = $order_id;
             $this->completed = 0;
         }
 
@@ -29,13 +28,14 @@
         }
 
         private function insertDemand() {
+            $db = $this->connect();
             $query = "INSERT INTO Demand (service_id, client_id) VALUES (:service_id, :client_id)";
-            $stmt = $this->connect()->prepare($query);
+            $stmt = $db->prepare($query);
             $stmt->bindParam(":service_id", $this->service_id);
             $stmt->bindParam(":client_id", $this->client_id);
             $stmt->execute();
             $stmt = null;
-            return $this->connect()->lastInsertId(); // Return the last inserted ID
+            return $db->lastInsertId(); // Return the last inserted ID
         }
 
         public function finishDemand() {
@@ -48,12 +48,20 @@
             $this->completed = 1; // Update the completed status
         }
 
+        public static function finishDemandById($db, $order_id) {
+            $query = "UPDATE Demand SET completed = 1, date_completed = CURRENT_TIMESTAMP WHERE order_id = :order_id";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(":order_id", $order_id);
+            $stmt->execute();
+            $stmt = null;
+        }
+
         public function createDemand() {
-            if ($this->checkDemandExists()) {
-                return -1; // Demand already exists
+            $existing = $this->getDemandByServiceAndClient($this->service_id, $this->client_id);
+            if ($existing) {
+                return $existing['order_id'];
             } else {
-                $this->insertDemand();
-                return 0; // Demand created successfully
+                return $this->insertDemand();
             }
         }
 
@@ -77,10 +85,31 @@
             return $demands; // Return all demands for the client
         }
 
+        public function getDemandsCompletedByClient($client_id) {
+            $query = "SELECT * FROM Demand WHERE client_id = :client_id AND completed = 1";
+            $stmt = $this->connect()->prepare($query);
+            $stmt->bindParam(":client_id", $client_id);
+            $stmt->execute();
+            $demands = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $stmt = null;
+            return $demands; // Return all completed demands for the client
+        }
+
         public function getDemandById($order_id) {
             $query = "SELECT * FROM Demand WHERE order_id = :order_id";
             $stmt = $this->connect()->prepare($query);
             $stmt->bindParam(":order_id", $order_id);
+            $stmt->execute();
+            $demand = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt = null;
+            return $demand;
+        }
+
+        public function getDemandByServiceAndClient($service_id, $client_id) {
+            $query = "SELECT * FROM Demand WHERE service_id = :service_id AND client_id = :client_id";
+            $stmt = $this->connect()->prepare($query);
+            $stmt->bindParam(":service_id", $service_id);
+            $stmt->bindParam(":client_id", $client_id);
             $stmt->execute();
             $demand = $stmt->fetch(PDO::FETCH_ASSOC);
             $stmt = null;

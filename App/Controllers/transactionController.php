@@ -18,6 +18,7 @@ class transactionController {
 
         $demandModel = new Demand();
         $order = $demandModel->getDemandById($order_id);
+        $isCompleted = !empty($order['completed']) && $order['completed'] == 1;
 
         // Get service info
         require_once __DIR__ . '/../Models/Service.php';
@@ -40,15 +41,17 @@ class transactionController {
 
         // Handle client payment
         if (!$isFreelancer && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pay'])) {
-            $amount = floatval($_POST['amount']);
-            $result = Transaction::createTransaction($order_id, $amount);
+            $amount = $_POST['amount'];
+            $result = Transaction::finishTransaction($order_id, $amount);
             if ($result === -1) {
                 $_SESSION['transaction_error'] = "Insufficient funds!";
+                header("Location: index.php?page=addFunds");
+                exit;
             } else {
                 $_SESSION['transaction_msg'] = "Payment successful! Order completed.";
+                header("Location: index.php?page=transaction");
+                exit;
             }
-            header("Location: index.php?page=transaction");
-            exit;
         }
 
         // Get transaction request (price) if exists

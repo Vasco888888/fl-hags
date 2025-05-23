@@ -64,9 +64,11 @@ CREATE TABLE Conversation (
     service_id INTEGER,
     client_id INTEGER,
     freelancer_id INTEGER,
+    order_id INTEGER,
     FOREIGN KEY (service_id) REFERENCES Service(service_id),
     FOREIGN KEY (client_id) REFERENCES Client(id),
-    FOREIGN KEY (freelancer_id) REFERENCES Freelancer(id)
+    FOREIGN KEY (freelancer_id) REFERENCES Freelancer(id),
+    FOREIGN KEY (order_id) REFERENCES Demand(order_id)
 );
 
 CREATE TABLE Message (
@@ -111,10 +113,11 @@ CREATE TABLE UserTransaction (
     FOREIGN KEY (order_id) REFERENCES Demand(order_id)
 );
 
-/* CREATE TABLE Proposal (
+CREATE TABLE Proposal (
     proposal_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    conversation_id INTEGER,
-    price DECIMAL(10,2),
-    status TEXT DEFAULT 'pending', -- 'pending', 'accepted', 'refused'
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-); */
+    conversation_id INTEGER NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    status VARCHAR(20) DEFAULT 'pending',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (conversation_id) REFERENCES Conversation(conversation_id)
+);

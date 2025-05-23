@@ -39,7 +39,9 @@
         <?php endif; ?>
     <?php else: ?>
         <h3>Pay for the Service</h3>
-        <?php if (!$priceRequest): ?>
+        <?php if ($isCompleted): ?>
+            <p class="success">This order has been paid and completed.</p>
+        <?php elseif (!$priceRequest): ?>
             <p>The freelancer has not asked for a price yet.</p>
         <?php else: ?>
             <p><strong>Requested Price:</strong> €<?= number_format($priceRequest['amount'], 2) ?></p>
