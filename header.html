@@ -1,12 +1,29 @@
 <header class="main-header">
     <div class="header-flex <?php echo isset($_SESSION['username']) ? 'logged-in' : 'logged-out'; ?>">
         <div class="header-left">
-            <img src="/assets/img/logo/logo.png" alt="Logo" class="header-logo">
-            <div class="header-text">
-                <h1 class="header-title">FL\HAGS</h1>
-                <h2 class="header-subtitle">FreeLance - Home And Garden Services</h2>
-            </div>
+            <?php if ((isset($_GET['page']) && $_GET['page'] === 'main')||(isset($_GET['page']) && $_GET['page'] === 'signIn')||(isset($_GET['page']) && $_GET['page'] === 'signUp')): ?>
+                <span class="header-logo-wrapper disabled-link">
+                    <img src="/assets/img/logo/logo.png" alt="Logo" class="header-logo">
+                </span>
+                <div class="header-text">
+                    <span class="disabled-link" style="text-decoration: none; color: inherit;">
+                        <h1 class="header-title">FL\HAGS</h1>
+                    </span>
+                    <h2 class="header-subtitle">FreeLance - Home And Garden Services</h2>
+                </div>
+            <?php else: ?>
+                <a href="index.php?page=allService" class="header-logo-wrapper">
+                    <img src="/assets/img/logo/logo.png" alt="Logo" class="header-logo">
+                </a>
+                <div class="header-text">
+                    <a href="index.php?page=allService" style="text-decoration: none; color: inherit;">
+                        <h1 class="header-title">FL\HAGS</h1>
+                    </a>
+                    <h2 class="header-subtitle">FreeLance - Home And Garden Services</h2>
+                </div>
+            <?php endif; ?>
         </div>
+
 
         <?php if (isset($_SESSION['username'])): ?>
         <div class="user-actions">

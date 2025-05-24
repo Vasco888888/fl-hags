@@ -15,7 +15,7 @@
         <p class="subtitle">Find the right freelancer for your needs</p>
         <div class="button-group">
             <form id="loginbtn" method="GET" action="">
-                <button id="loginBtn" type="submit" name="signin">Log In</button>
+                <button id="loginBtn" type="submit" name="signin">Sign In</button>
             </form>
             <form id="signupbtn" method="GET" action="">
                 <button id="signupBtn" type="submit" name="signup">Sign Up</button>
