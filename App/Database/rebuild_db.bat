@@ -1,7 +1,7 @@
 @echo off
 REM === CONFIGURAÇÕES ===
-set DB_PATH=minha_base.sqlite
-set SQL_SCRIPT=idk.sql
+set DB_PATH=database.db
+set SQL_SCRIPT=database.sql
 set SQLITE_EXE=%~dp0DB_UTILS\sqlite3.exe
 
 REM === VERIFICAR SE A BASE EXISTE ===

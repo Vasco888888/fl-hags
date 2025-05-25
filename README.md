@@ -35,7 +35,7 @@ FL/HAGS
 
 ## Running
 
-    sqlite3 database/database.db < database/database.sql
+    sqlite3 database.db < database.sql
     php -S localhost:9000
 
 ## Credentials
