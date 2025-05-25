@@ -40,7 +40,7 @@ class Service_Media extends Dbh {
     
         $media = self::getMediaByService($service_id);
         if (!$media || count($media) == 0) {
-            return '/assets/img/defaultserviceimage.png';
+            return '/assets/img/uploads/defaultserviceimage.png';
         }
         return $media[0]['path'];
     }
