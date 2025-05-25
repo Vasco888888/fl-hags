@@ -10,26 +10,29 @@
 <div class="order-details-container">
     <h2><?= htmlspecialchars($service['title']) ?></h2>
     <p><?= nl2br(htmlspecialchars($service['description'])) ?></p>
-    <div class="service-images" style="display:flex;gap:10px;">
+    <div class="service-images">
         <?php if (!empty($images)): ?>
             <?php foreach ($images as $img): ?>
-                <img src="<?= htmlspecialchars($img['path']) ?>" alt="Service Image" style="width:100px;height:100px;object-fit:cover;border-radius:6px;">
+                <img src="<?= htmlspecialchars($img['path']) ?>" alt="Service Image">
             <?php endforeach; ?>
         <?php else: ?>
-            <div style="width:100px;height:100px;background:#eee;border-radius:6px;display:flex;align-items:center;justify-content:center;">No Image</div>
+            <div class="no-image">No Image</div>
         <?php endif; ?>
     </div>
     <p><strong>Freelancer:</strong> <?= htmlspecialchars($freelancerName) ?></p>
 
     <?php if ($canReview): ?>
         <h3>Rate this Service</h3>
-        <?php if ($existingReview): ?>
-            <p>You already reviewed this service. Your rating: <?= htmlspecialchars($existingReview['rating']) ?> ★</p>
+        <?php if (is_array($existingReview)): ?>
+            <p>You already reviewed this service. Your rating: <?= $existingReview['rating'] ?> ★</p>
             <p><?= nl2br(htmlspecialchars($existingReview['comment'])) ?></p>
+            <form method="post" onsubmit="return confirm('Delete your review?');">
+                <button type="submit" name="delete_review" class="main-btn">Delete Review</button>
+            </form>
         <?php else: ?>
-            <form id="reviewForm" action="index.php?page=review&order_id=<?= $order['order_id'] ?>" method="post">
+            <form id="reviewForm" action="" method="post">
                 <label for="rating">Rating:</label>
-                <div id="starRating" style="display:inline-block;">
+                <div id="starRating">
                     <?php for ($i = 5; $i >= 1; $i--): ?>
                         <span class="star" data-value="<?= $i ?>">&#9733;</span>
                     <?php endfor; ?>
@@ -41,6 +44,18 @@
                 <br>
                 <button type="submit" class="main-btn">Submit Review</button>
             </form>
+            <script>
+            // Simple star rating JS
+            document.querySelectorAll('.star').forEach(function(star) {
+                star.addEventListener('click', function() {
+                    var rating = this.getAttribute('data-value');
+                    document.getElementById('rating').value = rating;
+                    document.querySelectorAll('.star').forEach(function(s) {
+                        s.style.color = (s.getAttribute('data-value') <= rating) ? '#FFA500' : '#aaa';
+                    });
+                });
+            });
+            </script>
         <?php endif; ?>
     <?php else: ?>
         <p>This order is not completed yet. You can review after completion.</p>

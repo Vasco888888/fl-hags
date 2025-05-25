@@ -60,12 +60,16 @@
                                 $rating = $reviewModel->getAverageRating($service['service_id']);
                             ?>
                             <?php if ($imgPath): ?>
-                                <img src="<?= htmlspecialchars($imgPath) ?>" alt="Service Image" style="width:48px;height:48px;object-fit:cover;border-radius:6px;">
+                                <img src="<?= htmlspecialchars($imgPath) ?>" alt="Service Image" class="service-thumb">
                             <?php else: ?>
-                                <div style="width:48px;height:48px;background:#eee;border-radius:6px;display:flex;align-items:center;justify-content:center;">No Image</div>
+                                <div class="service-thumb-placeholder">No Image</div>
                             <?php endif; ?>
-                            <span style="font-weight:500;"><?= htmlspecialchars($service['title']) ?></span>
-                            <span style="color:#FFA500;margin-left:8px;">★ <?= number_format($rating, 1) ?></span>
+                            <span class="service-title"><?= htmlspecialchars($service['title']) ?></span>
+                            <span class="service-rating">★ <?= number_format($rating, 1) ?></span>
+                            <form action="index.php?page=service" method="post" class="service-view-btn">
+                                <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
+                                <button type="submit" class="main-btn">View Service</button>
+                            </form>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -81,4 +85,4 @@
     </div>
     <script src="/assets/js/user.js"></script>
 </body>
-</html> 
+</html>

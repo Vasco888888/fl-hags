@@ -1,0 +1,76 @@
+/* Container for order details */
+.order-details-container {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 32px 28px 24px 28px;
+}
+
+/* Service images row */
+.service-images {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+/* Each service image */
+.service-images img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+
+/* Placeholder for no image */
+.service-images .no-image,
+.no-image {
+    width: 100px;
+    height: 100px;
+    background: #eee;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 0.98em;
+}
+
+/* Main button styling */
+.main-btn {
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.main-btn:hover {
+    background: #217dbb;
+}
+
+/* Delete review button */
+button[name="delete_review"].main-btn {
+    background: #e74c3c;
+}
+button[name="delete_review"].main-btn:hover {
+    background: #c0392b;
+}
+
+/* Star rating */
+#starRating .star {
+    font-size: 1.6em;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.15s;
+    user-select: none;
+}
+#starRating .star.selected,
+#starRating .star:hover,
+#starRating .star:hover ~ .star {
+    color: #FFA500;
+}
