@@ -50,13 +50,11 @@
             <?php if (empty($services)): ?>
                 <p>You Havent Created a Service</p>
             <?php else: ?>
-                <ul class="service-list">
+                <div class="service-slider">
                     <?php foreach ($services as $service): ?>
-                        <li class="service-item" style="display:flex;align-items:center;gap:12px;">
+                        <div class="service-item">
                             <?php
-                                // Get main image path
                                 $imgPath = $mediaModel->getMainImage($service['service_id']);
-                                // Get average rating
                                 $rating = $reviewModel->getAverageRating($service['service_id']);
                             ?>
                             <?php if ($imgPath): ?>
@@ -70,9 +68,9 @@
                                 <input type="hidden" name="service_id" value="<?= htmlspecialchars($service['service_id']) ?>">
                                 <button type="submit" class="main-btn">View Service</button>
                             </form>
-                        </li>
+                        </div>
                     <?php endforeach; ?>
-                </ul>
+                </div>
             <?php endif; ?>
         </div>
 

@@ -41,6 +41,34 @@
         </form>
         <?php endif; ?>
     </div>
+    <div class="service-reviews">
+        <h2>Reviews</h2>
+        <?php if (!empty($allReviews)): ?>
+            <?php foreach ($allReviews as $review): ?>
+                <div class="review">
+                    <div class="review-rating">
+                        <?php for ($i = 0; $i < $review['rating']; $i++): ?>
+                            <span style="color:#FFA500;">&#9733;</span>
+                        <?php endfor; ?>
+                        <?php for ($i = $review['rating']; $i < 5; $i++): ?>
+                            <span style="color:#ccc;">&#9733;</span>
+                        <?php endfor; ?>
+                    </div>
+                    <div class="review-comment">
+                        <?= nl2br(htmlspecialchars($review['comment'])) ?>
+                    </div>
+                    <div class="review-meta">
+                        <small>
+                            By: <?= htmlspecialchars(User::getNameById($review['client_id'])) ?>
+                            on <?= htmlspecialchars(date('Y-m-d', strtotime($review['date_pub']))) ?>
+                        </small>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No reviews yet for this service.</p>
+        <?php endif; ?>
+    </div>
 </div>
 </body>
 </html>

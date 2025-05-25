@@ -7,6 +7,7 @@ class serviceController {
         require_once __DIR__ . '/../Models/Service_Media.php';
         require_once __DIR__ . '/../Models/User.php';
         require_once __DIR__ . '/../Models/Service.php';
+        require_once __DIR__ . '/../Models/Review.php';
 
         session_start();
         // Get service_id from GET parameters
@@ -28,6 +29,9 @@ class serviceController {
         $freelancer_id = $service['freelancer_id'];
         // You may need to add a method to get user by ID if not present
         $freelancerName = User::getNameById($freelancer_id);
+
+        $reviewModel = new Review();
+        $allReviews = $reviewModel->getReviews($service_id);
 
         $_SESSION['service_id'] = $service_id;
         $_SESSION['freelancer_id'] = $freelancer_id;
