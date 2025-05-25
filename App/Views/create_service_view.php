@@ -29,7 +29,7 @@
                 <input type="number" name="base_price" id="base_price" min="1" max="50" step="1" required>
             </div>
             <div>
-                <label for="category">Category</label>
+                <label for="category">Category *</label>
                 <select name="category" id="category" required>
                     <option value="" disabled selected>Select a category</option>
                     <?= $categoryOptions ?>
