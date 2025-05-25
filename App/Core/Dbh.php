@@ -1,7 +1,7 @@
 <?php
 
 class Dbh {
-    #its a sqlite db so it doesnt run in a server
+    #It's a sqlite db so it doesnt run in a server
     public function connect() {
         try {
             $path = __DIR__ . "/../Database/minha_base.sqlite";

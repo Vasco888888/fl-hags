@@ -8,7 +8,6 @@ class mainController {
             $images[] = $imgUrlBase . basename($img);
         }
 
-        //var_dump($images); // TEMPORARY: See what PHP finds
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if (isset($_GET['signin'])) {
                 header("Location: index.php?page=signIn");

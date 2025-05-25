@@ -36,7 +36,7 @@
                 <input type="text" name="cc_name" id="ccName" maxlength="40" placeholder="Cardholder Name" required>
                 <input type="text" name="cc_address" id="ccAddress" maxlength="100" placeholder="Card Address" required>
                 <input type="month" name="cc_expiry" id="ccExpiry" required>
-                <input type="text" name="cc_cvv" id="ccCVV" maxlength="3" placeholder="CVV" pattern="\d{3,4}" required>
+                <input type="text" name="cc_cvv" id="ccCVV" maxlength="4" placeholder="CVV" pattern="\d{3,4}" required>
             </div>
         </div>
 

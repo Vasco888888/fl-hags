@@ -70,7 +70,7 @@ class Service extends Dbh{
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":base_price", $this->base_price);
         $stmt->execute();
-        $lastId = $db->lastInsertId(); // Use the SAME $db object!
+        $lastId = $db->lastInsertId(); // Use the SAME $db object
         error_log("Last inserted service_id: " . $lastId);
         $stmt = null;
         return $lastId; // Return the last inserted ID
