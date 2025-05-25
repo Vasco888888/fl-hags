@@ -79,7 +79,7 @@ class Admin extends Dbh {
 
     // Ban an user
     public function banUser($user_id) {
-        if (isAdmin($user_id)) return -1; // Cannot ban an admin
+        if ($this->isAdmin($user_id)) return -1; // Cannot ban an admin
         $query = "DELETE FROM User WHERE id = :id";
         $stmt = $this->connect()->prepare($query);
         $stmt->bindParam(':id', $user_id);
