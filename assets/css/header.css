@@ -2,7 +2,7 @@
     width: 100%;
     margin-top: 0;
     margin-bottom: 30px;
-    padding: 30px 0 10px 0;
+    padding: 10px 0 10px 0;
     background: linear-gradient(90deg, #228B22 0%, #4CAF50 100%);
     color: #fff;
     box-shadow: 0 2px 12px rgba(42,77,105,0.08);
@@ -37,11 +37,12 @@
 }
 
 .header-title {
-    font-size: 2.5em;
+    font-size: 2.5rem;
     font-weight: 800;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #ffffff;
     margin: 0;
-    animation: headerPulse 2.5s infinite alternate;
 }
 
 .header-subtitle {
@@ -50,10 +51,12 @@
     margin: 10px 0 0 0;
     letter-spacing: 1px;
     opacity: 0.85;
+    font-family: 'Montserrat', Arial, sans-serif;
+    color: #ffffff;
 }
 
 .header-logo {
-    height: 50px;
+    height: 60px;
     width: auto;
     object-fit: contain;
     display: block;
@@ -109,11 +112,11 @@
     background: #4CAF50;
 }
 
-.funds-form {
+.funds-formheader {
     margin: 0;
     padding: 0;
 }
-.funds-btn {
+.funds-btnheader {
     background: #fff;
     color: #228B22;
     border: 2px solid #228B22;
@@ -125,7 +128,7 @@
     margin-top: 10px;
     transition: background 0.2s, color 0.2s;
 }
-.funds-btn:hover {
+.funds-btnheader:hover {
     background: #228B22;
     color: #fff;
 }

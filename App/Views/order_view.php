@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Order Details</title>
     <link rel="stylesheet" href="/assets/css/order.css">
+
 </head>
 <body>
 <div class="order-details-container">

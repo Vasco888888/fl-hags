@@ -34,8 +34,8 @@
                 <button type="submit" class="signout-btn">Sign Out</button>
             </form>
             <!-- Funds display button -->
-            <form action="index.php?page=addFunds" method="post" class="funds-form">
-                <button type="submit" class="funds-btn">
+            <form action="index.php?page=addFunds" method="post" class="funds-formheader">
+                <button type="submit" class="funds-btnheader">
                     <?php
                         require_once __DIR__ . '/App/Models/User.php';
                         $user = new User($_SESSION['username']);

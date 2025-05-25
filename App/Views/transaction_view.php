@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Transaction</title>
     <link rel="stylesheet" href="/assets/css/order.css">
+
 </head>
 <body>
 <div class="transaction-container">

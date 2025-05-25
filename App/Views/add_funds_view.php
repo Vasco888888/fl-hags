@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Add Funds</title>
     <link rel="stylesheet" href="/assets/css/addFunds.css">
+
 </head>
 <body>
     <form class="funds-form" method="post" action="">

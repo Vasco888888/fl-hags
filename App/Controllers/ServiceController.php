@@ -8,6 +8,7 @@ class serviceController {
         require_once __DIR__ . '/../Models/User.php';
         require_once __DIR__ . '/../Models/Service.php';
         require_once __DIR__ . '/../Models/Review.php';
+        require_once __DIR__ . '/../Models/Category.php';
 
         session_start();
         // Get service_id from GET parameters
@@ -24,6 +25,11 @@ class serviceController {
             echo "Service not found.";
             exit;
         }
+
+        $categoryModel = new Category();
+        $category = $categoryModel->getCategory($service['category_id']);
+        $categoryName = $category['name'] ?? 'Unknown';
+
 
         $media = Service_Media::getMediaByService($service_id);
         $freelancer_id = $service['freelancer_id'];

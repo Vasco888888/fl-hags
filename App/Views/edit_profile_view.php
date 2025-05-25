@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>User Profile</title>
     <link rel="stylesheet" href="/assets/css/editProfile.css">
+
 </head>
 <body>
 <div class="changeData-container">

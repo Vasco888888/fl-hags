@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Your Profile</title>
     <link rel="stylesheet" href="/assets/css/user.css">
+
 </head>
 <body>
     <div class="user-profile-container">
@@ -18,6 +19,12 @@
                 <button type="submit" class="main-btn">Edit Profile</button>
             </form>
         </div>
+
+        <?php if ($isAdmin): ?>
+            <form action="index.php?page=adminControl" method="post" style="display:inline;">
+                <button type="submit" class="main-btn" style="background:#c62828;margin-bottom:15px;">Admin Panel</button>
+            </form>
+        <?php endif; ?>
 
         <h3>Your Completed Orders</h3>
         <div class="user-orders">

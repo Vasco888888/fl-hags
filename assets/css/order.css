@@ -1,76 +1,100 @@
-/* Container for order details */
-.order-details-container {
-    max-width: 700px;
+.transaction-container {
+    max-width: 900px;
     margin: 40px auto;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    padding: 32px 28px 24px 28px;
-}
-
-/* Service images row */
-.service-images {
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
     display: flex;
-    gap: 10px;
-    margin-bottom: 18px;
-}
-
-/* Each service image */
-.service-images img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 6px;
-    display: block;
-}
-
-/* Placeholder for no image */
-.service-images .no-image,
-.no-image {
-    width: 100px;
-    height: 100px;
-    background: #eee;
-    border-radius: 6px;
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    color: #888;
-    font-size: 0.98em;
+}
+.transaction-container h2,
+.transaction-container h3 {
+    color: #2e7d32;
+    margin-bottom: 20px;
 }
 
-/* Main button styling */
-.main-btn {
-    background: #3498db;
-    color: #fff;
-    border: none;
+.success,
+.error {
+    padding: 12px 20px;
+    margin-bottom: 20px;
     border-radius: 6px;
-    padding: 8px 18px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.main-btn:hover {
-    background: #217dbb;
+    font-weight: bold;
 }
 
-/* Delete review button */
-button[name="delete_review"].main-btn {
-    background: #e74c3c;
-}
-button[name="delete_review"].main-btn:hover {
-    background: #c0392b;
+.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
 }
 
-/* Star rating */
-#starRating .star {
-    font-size: 1.6em;
-    color: #aaa;
-    cursor: pointer;
-    transition: color 0.15s;
-    user-select: none;
+.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
 }
-#starRating .star.selected,
-#starRating .star:hover,
-#starRating .star:hover ~ .star {
-    color: #FFA500;
+
+.transaction-container form {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px 30px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.transaction-container label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+.transaction-container input[type="number"],
+.transaction-container textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: border-color 0.2s;
+}
+
+.transaction-container input[type="number"]:focus,
+.transaction-container textarea:focus {
+    border-color: #388e3c;
+    outline: none;
+}
+
+.transaction-container textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.transaction-container button.main-btn {
+    background-color: #388e3c;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.transaction-container button.main-btn:hover {
+    background-color: #2e7d32;
+}
+
+.transaction-container form + form {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .transaction-container form {
+        max-width: 100%;
+        padding: 15px;
+    }
 }

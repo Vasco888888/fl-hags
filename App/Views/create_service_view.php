@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Service</title>
-    <link rel="stylesheet" href="/assets/css/createService.css">
+    <link rel="stylesheet" href="/assets/css/createServ.css">
+
 </head>
 <body> 
     <div class="main-container">
@@ -29,7 +30,8 @@
             </div>
             <div>
                 <label for="category">Category</label>
-                <select name="category" id="category">
+                <select name="category" id="category" required>
+                    <option value="" disabled selected>Select a category</option>
                     <?= $categoryOptions ?>
                 </select>
             </div>

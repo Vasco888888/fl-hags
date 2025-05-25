@@ -44,9 +44,17 @@ class allServiceController {
             $categoryOptions .= '<option value="' . htmlspecialchars($cat['category_id']) . '"' . $selected . '>' . htmlspecialchars($cat['name']) . '</option>';
         }
 
+        $categoryModel = new Category();
+        $categories = $categoryModel->getAllCategories();
+        $categoryNames = [];
+        foreach ($categories as $cat) {
+            $categoryNames[$cat['category_id']] = $cat['name'];
+        }        
+
         // Prepare service cards HTML
         $serviceCards = '';
         foreach ($services as $service) {
+            $categoryName = $categoryNames[$service['category_id']] ?? 'Unknown';
             $image = Service_Media::getMainImage($service['service_id']);
 
             $rating = (new Review())->getAverageRating($service['service_id']);
@@ -58,6 +66,7 @@ class allServiceController {
                     <h2>' . htmlspecialchars($service['title']) . '</h2>
                     <div class="service-meta">
                         <span class="service-price">€ ' . htmlspecialchars($service['base_price']) . '</span>
+                        <span class="service-category">' . htmlspecialchars($categoryName) . '</span>
                         <span class="service-rating">' . $ratingText . '</span>
                     </div>
                     <form action="index.php?page=service" method="post" style="display:inline;">

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title><?php echo htmlspecialchars($service['title']); ?> | Service Details</title>
     <link rel="stylesheet" href="/assets/css/service.css">
+
 </head>
 <body>
 <div class="service-details-container">
@@ -12,6 +13,7 @@
     <div class="service-meta">
         <span class="freelancer-name">By: <?php echo htmlspecialchars($freelancerName); ?></span>
         <span class="service-price">Base Price: $<?php echo htmlspecialchars($service['base_price']); ?></span>
+        <span class="service-category">Category: <?php echo htmlspecialchars($categoryName); ?></span>        
     </div>
     <div class="service-images">
         <?php if ($media): ?>

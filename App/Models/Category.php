@@ -11,12 +11,22 @@ class Category extends Dbh {
     }
 
     public function insertCategory() {
-        $query = "INSERT INTO Category (name) VALUES (:name)";
+        $query = "INSERT OR IGNORE INTO Category (name) VALUES (:name)";
         $stmt = parent::connect()->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->execute();
         $stmt = null;
         return parent::connect()->lastInsertId();
+    }
+    
+    public function getCategory($category_id) {
+        $query = "SELECT * FROM Category WHERE category_id = :category_id";
+        $stmt = parent::connect()->prepare($query);
+        $stmt->bindParam(":category_id", $category_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $category = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = null;
+        return $category;
     }
 
     public function getAllCategories() {
