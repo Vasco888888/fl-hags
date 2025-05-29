@@ -143,7 +143,7 @@ INSERT INTO User (name, username, email, password) VALUES
 ('Admin Two', 'admin2', 'admin2@example.com', '$2y$10$bfLKUK/UqPRurTFA0jGZuuAXQa00cpri8g3E6mP3xx7GwmxCJS2v.');
 
 INSERT INTO Admin (id) VALUES (1), (2);
-
+ 
 -- Insert Freelancers
 INSERT INTO User (name, username, email, password) VALUES 
 ('Freelancer One', 'freelancer1', 'freelancer1@example.com', '$2y$10$bfLKUK/UqPRurTFA0jGZuuAXQa00cpri8g3E6mP3xx7GwmxCJS2v.'),
