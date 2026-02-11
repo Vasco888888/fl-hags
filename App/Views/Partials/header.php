@@ -1,7 +1,7 @@
 <header class="main-header">
     <div class="header-flex <?php echo isset($_SESSION['username']) ? 'logged-in' : 'logged-out'; ?>">
         <div class="header-left">
-            <?php if ((!isset($_GET['page'])) || ($_GET['page'] === 'main')|| ($_GET['page'] === 'signIn') || ($_GET['page'] === 'signUp')): ?>
+            <?php if ((!isset($_GET['page'])) || ($_GET['page'] === 'main') || ($_GET['page'] === 'signIn') || ($_GET['page'] === 'signUp')): ?>
                 <span class="header-logo-wrapper disabled-link">
                     <img src="/assets/img/logo/logo.png" alt="Logo" class="header-logo">
                 </span>
@@ -26,24 +26,24 @@
 
 
         <?php if (isset($_SESSION['username'])): ?>
-        <div class="user-actions">
-            <form action="index.php?page=user" method="post" class="profile-form">
-                <button type="submit" class="profile-btn">Profile</button>
-            </form>
-            <form action="index.php?page=signOut" method="post" class="signout-form">
-                <button type="submit" class="signout-btn">Sign Out</button>
-            </form>
-            <!-- Funds display button -->
-            <form action="index.php?page=addFunds" method="post" class="funds-formheader">
-                <button type="submit" class="funds-btnheader">
-                    <?php
-                        require_once __DIR__ . '/App/Models/User.php';
+            <div class="user-actions">
+                <form action="index.php?page=user" method="post" class="profile-form">
+                    <button type="submit" class="profile-btn">Profile</button>
+                </form>
+                <form action="index.php?page=signOut" method="post" class="signout-form">
+                    <button type="submit" class="signout-btn">Sign Out</button>
+                </form>
+                <!-- Funds display button -->
+                <form action="index.php?page=addFunds" method="post" class="funds-formheader">
+                    <button type="submit" class="funds-btnheader">
+                        <?php
+                        require_once __DIR__ . '/../../Models/User.php';
                         $user = new User($_SESSION['username']);
                         echo '€ ' . number_format($user->getBalance(), 2);
-                    ?>
-                </button>
-            </form>
-        </div>
+                        ?>
+                    </button>
+                </form>
+            </div>
         <?php endif; ?>
     </div>
 </header>

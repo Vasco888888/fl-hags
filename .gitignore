@@ -1,0 +1,25 @@
+# System Files
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Compiled / Binary
+# (Preserving existing tools in bin/)
+
+# Database
+# App/Database/database.db
+
+# Misc
+.temp/
+temp/
+logs/
+*.log

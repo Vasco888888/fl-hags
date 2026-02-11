@@ -1,5 +1,5 @@
 <?php
-    include __DIR__ . '/../../header.html';
+    include __DIR__ . '/Partials/header.php';
     // Assume $allUsers and $allServices are provided by the controller
 ?>
 <!DOCTYPE html>

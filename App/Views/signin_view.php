@@ -1,5 +1,5 @@
 <?php
-    include __DIR__ . '/../../header.html';
+    include __DIR__ . '/Partials/header.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

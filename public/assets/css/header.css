@@ -5,7 +5,7 @@
     padding: 10px 0 10px 0;
     background: linear-gradient(90deg, #228B22 0%, #4CAF50 100%);
     color: #fff;
-    box-shadow: 0 2px 12px rgba(42,77,105,0.08);
+    box-shadow: 0 2px 12px rgba(42, 77, 105, 0.08);
     position: relative;
     z-index: 2;
 }
@@ -74,9 +74,11 @@
 .user-actions {
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* right-align inside container */
+    align-items: flex-end;
+    /* right-align inside container */
     gap: 10px;
-    margin-left: auto; /* push container to far right */
+    margin-left: auto;
+    /* push container to far right */
     margin-right: 30px;
     padding: 5px;
 }
@@ -104,7 +106,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    margin-left: 0 !important; /* override any left-margin */
+    margin-left: 0 !important;
+    /* override any left-margin */
 }
 
 .profile-btn:hover,
@@ -116,6 +119,7 @@
     margin: 0;
     padding: 0;
 }
+
 .funds-btnheader {
     background: #fff;
     color: #228B22;
@@ -128,17 +132,29 @@
     margin-top: 10px;
     transition: background 0.2s, color 0.2s;
 }
+
 .funds-btnheader:hover {
     background: #228B22;
     color: #fff;
 }
 
 @keyframes headerPulse {
-    0% { text-shadow: 0 0 8px #fff, 0 0 2px #4CAF50; }
-    100% { text-shadow: 0 0 24px #fff, 0 0 8px #4CAF50; }
+    0% {
+        text-shadow: 0 0 8px #fff, 0 0 2px #4CAF50;
+    }
+
+    100% {
+        text-shadow: 0 0 24px #fff, 0 0 8px #4CAF50;
+    }
 }
 
 @keyframes subtitleFade {
-    0% { opacity: 0.85; }
-    100% { opacity: 1; letter-spacing: 3px; }
+    0% {
+        opacity: 0.85;
+    }
+
+    100% {
+        opacity: 1;
+        letter-spacing: 3px;
+    }
 }

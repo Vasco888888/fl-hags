@@ -35,8 +35,8 @@ FL\HAGS - FreeLance \ Home And Garden Services
 
 ## Running
 
-    sqlite3 App/Database/database.db < App/Database/database.sql
-    php -S localhost:9000
+    ./bin/sqlite3 App/Database/database.db < App/Database/database.sql
+    php -S localhost:9000 -t public
 
 ## Credentials
 Username/Password
