@@ -1,76 +1,84 @@
-# ltw02g01
+# FL\HAGS - Freelance \ Home And Garden Services
 
-João Júnior up202306719
-Mário Pereira up202304965
-Vasco Sá up202306731
+FL\HAGS is a specialized marketplace platform designed to connect freelancers offering home and garden services with clients. The system facilitates service discovery, order management, and direct communication between users.
 
-## Nome
+## Project Overview
 
-FL\HAGS - FreeLance \ Home And Garden Services
+This project was developed as part of the **Linguagens e Tecnologias Web (LTW)** course at the **Faculty of Engineering of the University of Porto (FEUP)**.
+
+- **Group ID:** ltw02g01
 
 ## Features
 
-**User:**
-- [x] Register a new account.
-- [x] Log in and out.
-- [x] Edit their profile, including their name, username, password, and email.
+### General Users
+- Secure account registration and authentication.
+- Full profile management, including personal details and credentials.
 
-**Freelancers:**
-- [x] List new services, providing details such as category, pricing, delivery time, and service description, along with images or videos.
-- [x] Track and manage their offered services.
-- [x] Respond to inquiries from clients regarding their services and provide custom offers if needed.
-- [x] Mark services as completed once delivered.
+### Freelancers
+- Detailed service listings including categories, pricing, descriptions, and media support.
+- Centralized management of offered services and orders.
+- Direct communication channel with clients to discuss requirements and provide custom offers.
+- Capability to mark services as completed upon delivery.
 
-**Clients:**
-- [x] Browse services using filters like category, price, and rating.
-- [x] Engage with freelancers to ask questions or request custom orders.
-- [x] Hire freelancers and proceed to checkout (simulate payment process).
-- [x] Leave ratings and reviews for completed services.
+### Clients
+- Advanced service browsing with filters for categories, price ranges, and ratings.
+- Real-time messaging with freelancers for inquiries and custom orders.
+- Streamlined service hiring and simulated checkout process.
+- Rating and review system to provide feedback on completed services.
 
-**Admins:**
-- [x] Elevate a user to admin status.
-- [x] Introduce new service categories and other pertinent entities.
-- [x] Oversee and ensure the smooth operation of the entire system.
+### Administrators
+- Administrative dashboard for system oversight.
+- User management and role elevation (Admin status).
+- Management of service categories and global system entities.
 
+## Technologies Used
 
-## Running
+- **Back-end:** PHP (MVC Architecture)
+- **Database:** SQLite
+- **Front-end:** HTML5, CSS3, JavaScript
+- **Server:** Built-in PHP Development Server
 
-    ./bin/sqlite3 App/Database/database.db < App/Database/database.sql
-    php -S localhost:9000 -t public
+## Getting Started
 
-## Credentials
-Username/Password
+### Prerequisites
+- PHP (version 7.4 or higher recommended)
+- SQLite3
 
-Admins:
-- admin1/admin1 
-- admin2/admin2
+### Installation and Execution
+1. Initialize the SQLite database:
+   ```bash
+   ./bin/sqlite3 App/Database/database.db < App/Database/database.sql
+   ```
+2. Launch the development server:
+   ```bash
+   php -S localhost:9000 -t public
+   ```
+3. Open your browser and navigate to: `http://localhost:9000`
 
-Freelancers:
-- freelancer1/freelancer1
-- freelancer2/freelancer2
-- freelancer3/freelancer3
-- freelancer4/freelancer4
-- freelancer5/freelancer5
-- freelancer6/freelancer6
-- freelancer7/freelancer7
-- freelancer8/freelancer8
-- freelancer9/freelancer9
-- freelancer10/freelancer10
+## Demo Credentials
 
-Clients:
-- client1/client1
-- client2/client2
-- client3/client3
-- client4/client4
-- client5/client5
-- client6/client6
-- client7/client7
-- client8/client8
-- client9/client9
-- client10/client10
-- client11/client11
-- client12/client12
-- client13/client13
-- client14/client14
-- client15/client15
+For testing and demonstration purposes, all accounts share a common password.
+
+**Default Password:** `test`
+
+### Administrative Accounts
+- `admin1`
+- `admin2`
+
+### Freelancer Accounts
+- `freelancer1` through `freelancer10`
+
+### Client Accounts
+- `client1` through `client15`
+
+## Credits
+
+This project was developed by:
+
+- **João Júnior** (up202306719)
+- **Mário Pereira** (up202304965)
+- **Vasco Sá** (up202306731)
+
+---
+FEUP - LTW 2025
 
